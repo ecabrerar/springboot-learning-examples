@@ -63,4 +63,8 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
 }
