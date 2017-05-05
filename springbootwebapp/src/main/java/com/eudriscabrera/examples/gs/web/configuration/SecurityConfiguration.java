@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  * @author ecabrerar
  */
-@Configuration
+//@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         httpSecurity.headers().frameOptions().disable();
     }
     
-    @Autowired
+   // @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         
         auth.inMemoryAuthentication()
