@@ -5,7 +5,6 @@
  */
 package com.eudriscabrera.examples.it;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

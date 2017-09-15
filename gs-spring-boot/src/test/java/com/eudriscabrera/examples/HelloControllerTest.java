@@ -5,7 +5,6 @@
  */
 package com.eudriscabrera.examples;
 
-import javax.net.ssl.SSLEngineResult;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
