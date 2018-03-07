@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.eudriscabrera.examples</groupId>
+        <artifactId>spring-boot-vuejs</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.eudriscabrera.examples</groupId>
+    <artifactId>frontend</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>frontend</name>
+ 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy Vue.js frontend content</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>src/main/resources/public</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${project.parent.basedir}/frontend/target/dist</directory>
+                                    <includes>
+                                        <include>static/</include>
+                                        <include>index.html</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <!-- Install our node and npm version to run npm/node scripts-->
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v6.11.3</nodeVersion>
+                            <npmVersion>5.4.1</npmVersion>
+                            <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
+                            <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
+                        </configuration>
+                    </execution>
+                    <!-- Set NPM Registry -->
+                    <execution>
+                        <id>npm set registry</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>config set registry https://registry.npmjs.org</arguments>
+                        </configuration>
+                    </execution>
+                    <!-- Set SSL privilege -->
+                    <execution>
+                        <id>npm set non-strict ssl</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <!-- Optional configuration which provides for running any npm command -->
+                        <configuration>
+                            <arguments>config set strict-ssl false</arguments>
+                        </configuration>
+                    </execution>
+                    <!-- Install all project dependencies -->
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+                        <!-- Optional configuration which provides for running any npm command -->
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <!-- Build and minify static files -->
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+</project>
