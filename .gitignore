@@ -1,0 +1,5 @@
+/gs-spring-boot/target/
+/gs-rest-service/target/
+/gs-serving-web-content/.nb-gradle/
+/gs-serving-web-content/build/
+/spring-boot-vuejs/frontend/target/
